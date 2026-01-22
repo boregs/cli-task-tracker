@@ -1,24 +1,41 @@
 using System;
 using System.Net.Http.Headers;
-using System.Text.Json;
+using System.Collections.Generic;
 
 
 public class DataAcess
 {
-	public static void addTask()
+    public static void addTask()
 	{
-        var newTask = new Task {id = 1, title = "oi", description = "teste"};
-
-		try
+        try
 		{
-			// passando para o arquivo json "formatando" as informaçoes
-			var options = new JsonSerializerOptions { WriteIndented = true };
-			string jsonString = JsonSerializer.Serialize(newTask, options);
+            Dictionary<string, string[]> taskKeeper = new Dictionary<string, string[]>();
+            long randLong = RandNumberGen.rand();
+            string keyID = TaskIDGenerator.GenerateId(randLong);
 
-			string filePath = "test.json";
-			File.WriteAllText(filePath, jsonString);
+			Console.WriteLine(">> What task do you want to add?");
+            Console.WriteLine("> ");
+            Console.Read();
 
-            Console.WriteLine(">> Add Task: Sucessfull");
+            Console.WriteLine(">> Give me a brief description of the task");
+            Console.WriteLine("> ");
+            Console.Read();
+
+            Console.WriteLine(">> When does it begin");
+            Console.WriteLine("> ");
+            Console.Read();
+
+            Console.WriteLine(">> When does it end?");
+            Console.WriteLine("> ");
+            Console.Read();
+
+
+
+
+            //taskKeeper.Add(keyID);
+
+
+            Console.WriteLine(">> Task Added Succesfuly");
         }
 		catch (Exception ex)
 		{
@@ -29,24 +46,6 @@ public class DataAcess
 
 	public static void readTask()
 	{
-		string filePath = "test.json";
-
-		try
-		{
-			string jsonString = File.ReadAllText(filePath);
-
-			Task task = JsonSerializer.Deserialize<Task>(jsonString);
-
-			Console.WriteLine($"Read Task: ");
-		} 
-			catch (FileNotFoundException)
-			{
-				Console.WriteLine($">> ERROR: The file {filePath} was not found or it does not exist");
-			} 
-				catch (JsonException ex)
-				{
-					 Console.WriteLine($">> ERROR PARSING JSON: {ex.Message}");
-				}
 	}
 
 	public static void updateTask()
