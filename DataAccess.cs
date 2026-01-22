@@ -9,25 +9,26 @@ public class DataAcess
 	{
         try
 		{
-            Dictionary<string, string[]> taskKeeper = new Dictionary<string, string[]>();
-            long randLong = RandNumberGen.rand();
-            string keyID = TaskIDGenerator.GenerateId(randLong);
-
+		    Dictionary<string, string[]> taskKeeper = new Dictionary<string, string[]>();
+		    long randLong = RandNumberGen.rand();
+		    string keyID = TaskIDGenerator.GenerateId(randLong);
+		
 			Console.WriteLine(">> What task do you want to add?");
-            Console.WriteLine("> ");
-            Console.Read();
-
-            Console.WriteLine(">> Give me a brief description of the task");
-            Console.WriteLine("> ");
-            Console.Read();
-
-            Console.WriteLine(">> When does it begin");
-            Console.WriteLine("> ");
-            Console.Read();
-
-            Console.WriteLine(">> When does it end?");
-            Console.WriteLine("> ");
-            Console.Read();
+		    Console.Write("> ");
+		    string taskTitle = Console.Read().ToString();
+		
+		    Console.WriteLine(">> Give me a brief description of the task");
+		    Console.Write("> ");
+		    string taskDesc = Console.Read().ToString();
+		
+		    Console.WriteLine(">> When does it begin");
+		    Console.Write("> ");
+			string taskInitialDate = Console.Read().ToString();
+		
+		    Console.WriteLine(">> When does it end?");
+		    Console.Write("> ");
+		    Console.Read();
+			string taskEndDate = Console.Read().ToString();
 
 
 
