@@ -4,6 +4,7 @@ public class Program
 {
     public static void Main(string[] args)
     {
+        /*
         Console.WriteLine("============================================================================");
         Console.WriteLine("========================== CLI Task Orginizer ==============================");
         Console.WriteLine("============================================================================");
@@ -32,5 +33,12 @@ public class Program
         }
 
         Console.ReadKey();
+        */
+
+        long randLong = RandNumberGen.rand();
+
+        Console.WriteLine(TaskIDGenerator.GenerateId(randLong));
+
+
     }
 }
