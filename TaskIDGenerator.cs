@@ -9,8 +9,6 @@ public class TaskIDGenerator
 {
     private const string Encode_32_Chars = "0123456789ABCDEFGHIJKLMNOPQRSTUV";
 
-    private static readonly ThreadLocal<char[]> _charBufferThreadLocal =
-        new ThreadLocal<char[]>(() => new char[13]);
 
     [ThreadStatic]
     private static char[] _charBufferThreadStatic;
@@ -18,7 +16,8 @@ public class TaskIDGenerator
     private static readonly ThreadLocal<char[]> _buffer =
     new ThreadLocal<char[]>(() => new char[13]);
 
-    private static string GenerateId(long id)
+    // precisa passar como um argumento numeros diferentes para gerar diferentes ids unicos
+    public static string GenerateId(long id)
     {
         char[] buffer = _buffer.Value;
 
@@ -38,5 +37,4 @@ public class TaskIDGenerator
 
         return new string(buffer, 0, buffer.Length);
     }
-
 }
