@@ -7,41 +7,40 @@ public class DataAcess
 {
     public static void addTask()
 	{
-        try
+       try
 		{
-		    Dictionary<string, string[]> taskKeeper = new Dictionary<string, string[]>();
-		    long randLong = RandNumberGen.rand();
-		    string keyID = TaskIDGenerator.GenerateId(randLong);
+			Dictionary<string, string[]> taskKeeper = new Dictionary<string, string[]>();
+			long randLong = RandNumberGen.rand();
+			string keyID = TaskIDGenerator.GenerateId(randLong);
 		
-			Console.WriteLine(">> What task do you want to add?");
-		    Console.Write("> ");
-		    string taskTitle = Console.Read().ToString();
 		
-		    Console.WriteLine(">> Give me a brief description of the task");
+		    Console.WriteLine(">> Give me the name of the task:");
 		    Console.Write("> ");
-		    string taskDesc = Console.Read().ToString();
+		    string taskTitle = Console.ReadLine();
 		
-		    Console.WriteLine(">> When does it begin");
+		    Console.WriteLine(">> Give me a brief description:");
 		    Console.Write("> ");
-			string taskInitialDate = Console.Read().ToString();
+		    string taskDesc = Console.ReadLine();
+		
+		    Console.WriteLine(">> When does it begin?");
+		    Console.Write("> ");
+		    string taskInitDate = Console.ReadLine();
 		
 		    Console.WriteLine(">> When does it end?");
 		    Console.Write("> ");
-		    Console.Read();
-			string taskEndDate = Console.Read().ToString();
-
-
-
-
-            //taskKeeper.Add(keyID);
-
-
-            Console.WriteLine(">> Task Added Succesfuly");
-        }
+		    string taskEndDate = Console.ReadLine();
+		
+		    Console.WriteLine($"Title: {taskTitle}, Description: {taskDesc}, Initial date {taskInitDate}, End date: {taskEndDate}");
+		
+		    //taskKeeper.Add(keyID);
+		
+		
+		    Console.WriteLine(">> Task Added Succesfuly");
+		}
 		catch (Exception ex)
 		{
-            Console.WriteLine($">> ERROR: {ex.Message}");
-        }
+		    Console.WriteLine($">> ERROR: {ex.Message}");
+		}
 		
     }
 
