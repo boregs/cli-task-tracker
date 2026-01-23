@@ -32,10 +32,25 @@ public class DataAcess
 		
 		    Console.WriteLine($"Title: {taskTitle}, Description: {taskDesc}, Initial date {taskInitDate}, End date: {taskEndDate}");
 		
-		    //taskKeeper.Add(keyID);
-		
-		
-		    Console.WriteLine(">> Task Added Succesfuly");
+		    taskDetails = [taskTitle, taskDesc, taskInitDate, taskEndDate];
+
+			taskKeeper.Add(keyID, taskDetails);
+			
+			Console.WriteLine(">> Task Added Succesfuly");
+			
+			
+			/*Console.WriteLine("============================== TESTING HASHMAP ==============================");
+			
+			foreach (KeyValuePair<string, string[]> entry in taskKeeper)
+			{
+				string key = entry.Key;
+				string[] values = entry.Value;
+			
+				Console.Write($"ID: {key}  |  ");
+			    Console.Write("Contents: ");
+			    Console.Write($"[{string.Join(",", values)}]");
+			}
+			*/
 		}
 		catch (Exception ex)
 		{
