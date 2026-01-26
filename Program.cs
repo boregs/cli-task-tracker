@@ -18,25 +18,26 @@ public class Program
             }
             else if (userInput == "1")
             {
-                DataAcess.ReadTask(taskKeeper);
-
+                DataAcess.AddTask(taskKeeper);
             }
             else if (userInput == "2")
             {
-                DataAcess.AddTask(taskKeeper);
+                DataAcess.ReadTask(taskKeeper);
             }
             else if (userInput == "3")
             {
-                DataAcess.DeleteTask();
+                DataAcess.UpdateTask(taskKeeper);
             }
             else if (userInput == "4")
+            {
+                DataAcess.DeleteTask(taskKeeper);
+            } 
+            else if (userInput == "5")
             {
                 break;
             }
 
         }
-
-        
     }
 
     public static void Introduction()
@@ -48,9 +49,10 @@ public class Program
         Console.WriteLine("");
         Console.WriteLine("----------------------------------------------------------------------------");
         Console.WriteLine(">> What do you want to do?");
-        Console.WriteLine("> 1 - Check Tasks");
-        Console.WriteLine("> 2 - Add Task");
-        Console.WriteLine("> 3 - Delete Task");
-        Console.WriteLine("> 4 - Leave");
+        Console.WriteLine("> 1 - Add Tasks");
+        Console.WriteLine("> 2 - Check Task");
+        Console.WriteLine("> 3 - Update Task");
+        Console.WriteLine("> 4 - Delete Task");
+        Console.WriteLine("> 5 - Exit");
     }
 }
