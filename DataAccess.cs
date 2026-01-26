@@ -1,24 +1,58 @@
 using System;
 using System.Net.Http.Headers;
-using System.Text.Json;
+using System.Collections.Generic;
 
 
 public class DataAcess
 {
-	public static void addTask()
+
+    public static void AddTask(Dictionary<string, string[]> x)
 	{
-        var newTask = new Task {id = 1, title = "oi", description = "teste"};
-
 		try
-		{
-			// passando para o arquivo json "formatando" as informaçoes
-			var options = new JsonSerializerOptions { WriteIndented = true };
-			string jsonString = JsonSerializer.Serialize(newTask, options);
+        {
+            long randLong = RandNumberGen.Rand();
+			string keyID = TaskIDGenerator.GenerateId(randLong);
+            string[] taskDetails;
 
-			string filePath = "test.json";
-			File.WriteAllText(filePath, jsonString);
+            Console.WriteLine(">> Give me the name of the task:");
+            Console.Write("> ");
+            string taskTitle = Console.ReadLine();
 
-            Console.WriteLine(">> Add Task: Sucessfull");
+            Console.WriteLine(">> Give me a brief description:");
+            Console.Write("> ");
+            string taskDesc = Console.ReadLine();
+
+            Console.WriteLine(">> When does it begin?");
+            Console.WriteLine(">> NOTE: Please format the date with: DD-MM-YYYY");
+            Console.Write("> ");
+            string taskInitDate = Console.ReadLine();
+
+            Console.WriteLine(">> When does it end?");
+            Console.WriteLine(">> NOTE: Please format the date with: DD-MM-YYYY");
+            Console.Write("> ");
+            string taskEndDate = Console.ReadLine();
+
+            Console.WriteLine($"Title: {taskTitle}, Description: {taskDesc}, Initial date {taskInitDate}, End date: {taskEndDate}");
+
+			taskDetails = [taskTitle, taskDesc, taskInitDate, taskEndDate];
+
+            x.Add(keyID, taskDetails);
+
+            Console.WriteLine(">> Task Added Succesfuly\n");
+
+
+			/* Console.WriteLine("============================== TESTING HASHMAP ==============================");
+			
+			foreach (KeyValuePair<string, string[]> entry in x)
+			{
+				string key = entry.Key;
+				string[] values = entry.Value;
+
+				Console.Write($"ID: {key}  |  ");
+                Console.Write("Contents: ");
+                Console.Write($"[{string.Join(",", values)}]");
+			}
+			*/
         }
 		catch (Exception ex)
 		{
@@ -27,29 +61,60 @@ public class DataAcess
 		
     }
 
-	public static void readTask()
+
+    // need to fix this method
+	public static void ReadTask(Dictionary<string, string[]> x)
 	{
-		string filePath = "test.json";
+        long randLong = RandNumberGen.Rand();
+        string keyID = TaskIDGenerator.GenerateId(randLong);
 
-		try
-		{
-			string jsonString = File.ReadAllText(filePath);
+        Console.WriteLine(">> Do you want to see all tasks? (Y/n)");
+        Console.WriteLine(">> Y - Yes (Recommended)");
+        Console.WriteLine(">> n - No");
+        
+		string userInput = Console.ReadLine().ToLower();
 
-			Task task = JsonSerializer.Deserialize<Task>(jsonString);
+        if (userInput == "y")
+        {
+            try
+            {
+                foreach (KeyValuePair<string, string[]> entry in x)
+                {
+                    string key = entry.Key;
+                    string[] values = entry.Value;
 
-			Console.WriteLine($"Read Task: ");
-		} 
-			catch (FileNotFoundException)
-			{
-				Console.WriteLine($">> ERROR: The file {filePath} was not found or it does not exist");
-			} 
-				catch (JsonException ex)
-				{
-					 Console.WriteLine($">> ERROR PARSING JSON: {ex.Message}");
-				}
-	}
+                    Console.Write($"\nID: {key}  |  ");
+                    Console.Write("Contents: ");
+                    Console.Write($"[{string.Join(" | ", values)}]");
+                    Console.Write("\n");
+                }
 
-	public static void updateTask()
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($">> ERROR: {ex.Message}");
+            }
+        }
+        else if (userInput == "n") {
+
+            Console.WriteLine(">> Please Inform the ID of the task:");
+            Console.WriteLine(">> NOTE: Please use the exact ID");
+            Console.WriteLine(">");
+            string taskID = Console.ReadLine();
+            
+            // searches the ID(key) on the hashmap
+            if (x.ContainsKey(taskID))
+            {
+                Console.WriteLine($"Task {taskID} found. Content: {x[taskID]}");
+            }
+        }
+        else
+        {
+            Console.WriteLine(">> ERROR: Please choose an available option");
+        }
+    }
+
+	public static void UpdateTask()
 	{
 		string filePath = "test.json";
 
@@ -70,7 +135,7 @@ public class DataAcess
 		 */
 	}
 
-	public static void deleteTask() 
+	public static void DeleteTask() 
 	{
         string filePath = "test.json";
 
