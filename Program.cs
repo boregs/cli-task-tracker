@@ -4,27 +4,30 @@ public class Program
 {
     public static void Main(string[] args)
     {
+        Dictionary<string, string[]> taskKeeper = new Dictionary<string, string[]>();
         while (true)
         {
             Introduction();
 
             string userInput = Console.ReadLine();
 
+            // fix this
             if (userInput == null)
             {
                 Console.WriteLine(">> ERROR: You need to choose a option");
             }
             else if (userInput == "1")
             {
-                DataAcess.ReadTask();
+                DataAcess.ReadTask(taskKeeper);
+
             }
             else if (userInput == "2")
             {
-                DataAcess.AddTask();
+                DataAcess.AddTask(taskKeeper);
             }
             else if (userInput == "3")
             {
-
+                DataAcess.DeleteTask();
             }
             else if (userInput == "4")
             {
