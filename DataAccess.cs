@@ -111,7 +111,11 @@ public class DataAcess
             if (x.ContainsKey(taskID))
             {
                 Thread.Sleep(500);
-                Console.WriteLine($"Task {taskID} found. Content: {x[taskID]}");
+                foreach (var key in x)
+                {
+                    string values = string.Join(" | ", key.Value);
+                    Console.WriteLine($">> ID {taskID} found. Content: {values}");
+                }
             }
             else {
                 Console.WriteLine($">> ERROR: No results found for the ID '{taskID}'. " +
@@ -206,6 +210,22 @@ public class DataAcess
         Console.WriteLine(">> Which task do you want to delete?");
         Console.WriteLine(">> NOTE: Please inform the exact ID");
         string userChoice = Console.ReadLine();
+
+        if (x.ContainsKey(userChoice) == false)
+        {
+            Console.WriteLine($">> ERROR: No results found for the ID '{userChoice}'. " +
+                $"Check your spelling or try a different ID.\n");
+            DataAcess.DeleteTask(x);
+        }
+
+        x.Remove(userChoice);
+
+        Thread.Sleep(1000);
+
+        Console.WriteLine(">> Task Deleted Succesfuly\n");
+
+        Thread.Sleep(1500);
+        Console.Clear();
     }
 }
 
