@@ -155,11 +155,12 @@ public class SaveTasks
         string filePath = Path.Combine(downloadFolder, "MyTasks.txt");
 
         try { 
-            Console.WriteLine(File.ReadAllLines(filePath));
+            Console.WriteLine(File.ReadAllText(filePath));
         }
         catch (DirectoryNotFoundException)
         {
-            Console.WriteLine(">> ERROR: Directory not found");
+            Console.WriteLine(">> ERROR: Directory not found, check to see if you have a 'MyTasks.txt' file on" +
+                "your download folder ");
 
         }
         catch (UnauthorizedAccessException)
