@@ -11,59 +11,141 @@ public class SaveTasks
 	public static void Saving(string x, Dictionary<string, string[]> y)
 	{
 		switch (x.ToLower()){
-			case "y":
-				break;
-
 			case "n":
                 string userProfile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
                 string downloadFolder = Path.Combine(userProfile, "Downloads");
                 string filePath = Path.Combine(downloadFolder, "MyTasks.txt");
-                try
-				{
-					using (StreamWriter writer = new StreamWriter(filePath, false))
-					{
-						foreach (var entry in y)
-						{
-							string formatedValues = string.Join($"{entry.Key} : {entry.Value}");
-                            writer.WriteLine($"{entry.Key} : {formatedValues}");
-                        }
-					}
-					Console.WriteLine($">> Tasks saved to {filePath} successfully");
-                }
-                catch (DirectoryNotFoundException)
-                {
-                    Console.WriteLine(">> ERROR: Directory not found");
-                }
-                catch (UnauthorizedAccessException)
-                {
-                    Console.WriteLine(">> ERROR: No permition to write on the file ");
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine($">> ERROR: {e.Message}");
-                }
-                break;
 
+                if (File.Exists(filePath) == false) {
+
+                    try
+                    {
+                        using (StreamWriter writer = new StreamWriter(filePath, false))
+                        {
+                            foreach (KeyValuePair<string, string[]> entry in y)
+                            {
+                                string key = entry.Key;
+                                string[] values = entry.Value;
+                                writer.WriteLine($"{key} : [{string.Join(" | ", values)}]\n");
+
+                            }
+                        }
+                        Console.WriteLine($">> Tasks saved to {filePath} successfully");
+
+                    } catch (DirectoryNotFoundException){
+                        Console.WriteLine(">> ERROR: Directory not found");
+
+                    } catch (UnauthorizedAccessException){
+                        Console.WriteLine(">> ERROR: No permition to write on the file ");
+
+                    } catch (Exception e){
+                        Console.WriteLine($">> ERROR: {e.Message}");
+                    }
+
+                } else {
+                    try
+                    {
+                        foreach (KeyValuePair<string, string[]> entry in y)
+                        {
+                            string key = entry.Key;
+                            string[] values = entry.Value;
+                            File.AppendAllText(filePath, $"{key} : [{string.Join(" | ", values)}]\n");
+
+                        }
+
+                        Console.WriteLine($">> Tasks saved to {filePath} successfully");
+
+                    }
+                    catch (DirectoryNotFoundException)
+                    {
+                        Console.WriteLine(">> ERROR: Directory not found");
+
+                    }
+                    catch (UnauthorizedAccessException)
+                    {
+                        Console.WriteLine(">> ERROR: No permition to write on the file ");
+
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine($">> ERROR: {e.Message}");
+                    }
+                }
+
+                break;
 
             default:
-                var filePathDefault = @"C:\Downloads\MyTasks.txt";
-                try
+                string userProfileDefault = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+                string downloadFolderDefault = Path.Combine(userProfileDefault, "Downloads");
+                string filePathDefault = Path.Combine(downloadFolderDefault, "MyTasks.txt");
+
+                if (File.Exists(filePathDefault) == false)
                 {
-                    using (StreamWriter writer = new StreamWriter(filePathDefault, false))
+
+                    try
                     {
-                        foreach (var entry in y)
+                        using (StreamWriter writer = new StreamWriter(filePathDefault, false))
                         {
-                            writer.WriteLine($"{entry.Key} : {entry.Value}");
+                            foreach (KeyValuePair<string, string[]> entry in y)
+                            {
+                                string key = entry.Key;
+                                string[] values = entry.Value;
+                                writer.WriteLine($"{key} : [{string.Join(" | ", values)}]\n");
+
+                            }
                         }
+                        Console.WriteLine($">> Tasks saved to {filePathDefault} successfully");
+
                     }
-                    Console.WriteLine($">> Tasks saved to {filePathDefault} successfully");
+                    catch (DirectoryNotFoundException)
+                    {
+                        Console.WriteLine(">> ERROR: Directory not found");
+
+                    }
+                    catch (UnauthorizedAccessException)
+                    {
+                        Console.WriteLine(">> ERROR: No permition to write on the file ");
+
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine($">> ERROR: {e.Message}");
+                    }
+
                 }
-                catch (Exception e)
+                else
                 {
-                    Console.WriteLine($">> ERROR: {e}");
+                    try
+                    {
+                        foreach (KeyValuePair<string, string[]> entry in y)
+                        {
+                            string key = entry.Key;
+                            string[] values = entry.Value;
+                            File.AppendAllText(filePathDefault, $"{key} : [{string.Join(" | ", values)}]\n");
+
+                        }
+
+                        Console.WriteLine($">> Tasks saved to {filePathDefault} successfully");
+
+                    }
+                    catch (DirectoryNotFoundException)
+                    {
+                        Console.WriteLine(">> ERROR: Directory not found");
+
+                    }
+                    catch (UnauthorizedAccessException)
+                    {
+                        Console.WriteLine(">> ERROR: No permition to write on the file ");
+
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine($">> ERROR: {e.Message}");
+                    }
                 }
+
                 break;
-		}
+        }
 	}
 
 	public static void Reading()
