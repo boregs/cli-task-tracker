@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 
 public class Program
 {
@@ -34,6 +35,19 @@ public class Program
             } 
             else if (userInput == "5")
             {
+                SaveTasks.Reading();
+            }
+            else if (userInput == "6")
+            {
+                Console.WriteLine(">> Leave without saving? (y/N)");
+                string leaveChoise = Console.ReadLine().ToLower();
+
+                if (leaveChoise.ToLower() == "y")
+                {
+                    break;
+                }
+                SaveTasks.Saving(leaveChoise, taskKeeper);
+
                 break;
             }
 
@@ -53,6 +67,7 @@ public class Program
         Console.WriteLine("> 2 - Check Task");
         Console.WriteLine("> 3 - Update Task");
         Console.WriteLine("> 4 - Delete Task");
-        Console.WriteLine("> 5 - Exit");
+        Console.WriteLine("> 5 - See Saved Tasks");
+        Console.WriteLine("> 6 - Exit");
     }
 }
