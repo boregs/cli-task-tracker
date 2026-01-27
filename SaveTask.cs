@@ -150,6 +150,26 @@ public class SaveTasks
 
 	public static void Reading()
 	{
-	
-	}
+        string userProfile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+        string downloadFolder = Path.Combine(userProfile, "Downloads");
+        string filePath = Path.Combine(downloadFolder, "MyTasks.txt");
+
+        try { 
+            Console.WriteLine(File.ReadAllLines(filePath));
+        }
+        catch (DirectoryNotFoundException)
+        {
+            Console.WriteLine(">> ERROR: Directory not found");
+
+        }
+        catch (UnauthorizedAccessException)
+        {
+            Console.WriteLine(">> ERROR: No permition to read the file ");
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($">> ERROR: {e.Message}");
+        }
+    }
 }
