@@ -60,11 +60,10 @@ public class Program
         Console.WriteLine("========================== CLI Task Orginizer ==============================");
         Console.WriteLine("============================================================================");
 
-        Console.WriteLine("");
-        Console.WriteLine("----------------------------------------------------------------------------");
+        Console.WriteLine("\n----------------------------------------------------------------------------");
         Console.WriteLine(">> What do you want to do?");
         Console.WriteLine("> 1 - Add Tasks");
-        Console.WriteLine("> 2 - Check Task");
+        Console.WriteLine("> 2 - Check Tasks");
         Console.WriteLine("> 3 - Update Task");
         Console.WriteLine("> 4 - Delete Task");
         Console.WriteLine("> 5 - See Saved Tasks");
