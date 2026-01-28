@@ -19,19 +19,25 @@ public class Program
             }
             else if (userInput == "1")
             {
-                DataAcess.AddTask(taskKeeper);
+                TaskRepository.AddTask(taskKeeper);
             }
             else if (userInput == "2")
             {
-                DataAcess.ReadTask(taskKeeper);
+                TaskRepository.ReadTask(taskKeeper);
             }
             else if (userInput == "3")
             {
-                DataAcess.UpdateTask(taskKeeper);
+                Console.WriteLine(">> WARNING: Updating a task only applies to unsaved tasks." +
+                    "If you want to update a saved task, you have to do it manualy\n");
+                Thread.Sleep(500);
+                TaskRepository.UpdateTask(taskKeeper);
             }
             else if (userInput == "4")
             {
-                DataAcess.DeleteTask(taskKeeper);
+                Console.WriteLine(">> WARNING: Deleting a task only applies to unsaved tasks." +
+                    "If you want to delete a saved task, you have to do it manualy\n");
+                Thread.Sleep(500);
+                TaskRepository.DeleteTask(taskKeeper);
             } 
             else if (userInput == "5")
             {
